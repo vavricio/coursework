@@ -4,9 +4,9 @@
 
 #include "Person.h"
 
-Person::Person() : name(""), surname(""), age(0) {}
+Person::Person() : name("default"), surname("default"), age(0) {}
 
-Person::Person(string name, string surname, unsigned int age): name(name), surname(surname), age(age) {}
+Person::Person(const string &name, const string &surname, unsigned int age): name(name), surname(surname), age(age) {}
 
 Person::~Person() = default;
 
@@ -34,37 +34,45 @@ unsigned int Person::getAge() const {
     return age;
 }
 
-string Person::getId() const {
+string Person::getType() const {
     return "Person";
 }
 
-void Person::print(ostream &os) const {
-    os << "Identifier:" << " " << getId() << "\n"
+void Person::osSerialize(ostream &os) const {
+    os << "Identifier:" << " " << getType() << "\n"
        << "Name:" << " " << name << "\n"
        << "Surname:" << " " << surname << "\n"
        << "Age:" << " " << age << "\n";
 }
 
-void Person::fromFile(string filename, ifstream &ifs) const {
-    ifstream fin;
-    fin.open(filename);
-    if (!fin){
-        cout << "Error opening file.\n";
-    } else {
-        
-    }
+void Person::ofSerialize(ofstream &of) const {
+    of << getType() << "\n"
+       << name << "\n"
+       << surname << "\n"
+       << age << "\n";
 }
 
-ostream &operator<<(ostream &os, const Person &person) {
-    person.print(os);
+void Person::ifDeserialize(ifstream &is) {
+    getline(is, name, '\n');
+    getline(is, surname, '\n');
+    string stringAge;
+    getline(is, stringAge, '\n');
+    age = stoul(stringAge);
+}
+
+ostream &operator<<(ostream &os, const Person *person) {
+    person->osSerialize(os);
     return os;
 }
 
 ofstream &operator<<(ofstream &of, const Person &person) {
-    of << person.getId() << ","
-       <<person.name << ","
-       <<person.surname << ","
-       <<person.age << ",";
+    person.ofSerialize(of);
     return of;
 }
+
+ifstream &operator>>(ifstream &is, Person &person) {
+    person.ifDeserialize(is);
+    return is;
+}
+
 

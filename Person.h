@@ -15,10 +15,15 @@ protected:
     string name;
     string surname;
     unsigned int age;
+
+    virtual void osSerialize(ostream &os) const;
+    virtual void ofSerialize(ofstream &of) const;
+    virtual void ifDeserialize(ifstream &is);
+
 public:
     // ------------------------------- constructor/destructor
     Person();
-    Person(string, string, unsigned int);
+    Person(const string &, const string &, unsigned int);
     ~Person();
 
     // ------------------------------- setters
@@ -27,18 +32,17 @@ public:
     void setAge(const unsigned int& age);
 
     // ------------------------------- getters
+    virtual string getType() const;
     string getName() const;
     string getSurname() const;
     unsigned int getAge() const;
 
     // ------------------------------- getting ID
-    virtual string getId() const;
 
-    friend ostream& operator<<(ostream& os, const Person& person);
+
+    friend ostream& operator<<(ostream& os, const Person* person);
     friend ofstream& operator<<(ofstream& of, const Person& person);
-    virtual void print(ostream &os) const;
-    virtual void fromFile(string filename, ifstream &ifs) const;
-    virtual void toFile(string filename) const;
+    friend ifstream& operator>>(ifstream& is, Person& person);
 };
 
 

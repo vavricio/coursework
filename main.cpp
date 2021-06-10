@@ -1,6 +1,11 @@
 #include <iostream>
 
+#include "UserInterface.h"
+#include "CyclicList.h"
+
+
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    UserInterface* ui = UserInterface::getUserInterface();
+    ui->startInterface();
     return 0;
 }
