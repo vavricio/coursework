@@ -19,6 +19,7 @@ struct Node {
 class CyclicList {
 public:
     CyclicList();
+    ~CyclicList();
     unsigned int getSize() const;
     void insert(Person* element);
     bool del(unsigned int index);

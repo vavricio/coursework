@@ -8,11 +8,13 @@ Node::Node(Person *value_, Node *next_) : value(value_), next(next_){}
 
 Node::~Node() {
     delete value;
-    //debug
-    cout << "Node deleted\n";
 }
 
 CyclicList::CyclicList() : end(nullptr), size(0) {}
+
+CyclicList::~CyclicList() {
+    deleteAll();
+}
 
 unsigned int CyclicList::getSize() const {
     return size;
@@ -83,6 +85,7 @@ bool CyclicList::del(uint index) {
     return true;
 }
 
+
 bool CyclicList::deleteAll() {
     if(end == nullptr){
         cout << "List is empty" << endl;
@@ -111,7 +114,6 @@ bool CyclicList::deleteAll() {
     cout << "List was cleared" << endl;
     return true;
 }
-
 
 bool CyclicList::apply(const std::function<void (Person*)>& fun) {
     if(end == nullptr)
