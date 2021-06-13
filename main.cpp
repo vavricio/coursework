@@ -1,7 +1,5 @@
 #include <iostream>
-
 #include "UserInterface.h"
-#include "CyclicList.h"
 
 
 int main() {

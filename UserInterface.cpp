@@ -131,7 +131,7 @@ unsigned int UserInterface::validateCourse() {
     string courseString;
 
     while (true) {
-        cout << "Enter course:";
+        cout << "Enter course: ";
         cin >> courseString;
         try {
             courseNumber = stoul(courseString);
@@ -156,7 +156,7 @@ void UserInterface::getPersonData(string &name, string &surname, unsigned int &a
 
     string ageString;
     while (true) {
-        cout << "Enter age:";
+        cout << "Enter age: ";
         cin >> ageString;
 
         try {
@@ -266,9 +266,8 @@ bool UserInterface::writeToFile(const string &filename) {
         cout << "Error opening file" << endl;
         return conclusion;
     }
-
    conclusion = lst.apply([&of](Person* person){
-        of << person;
+        of << (*person);
     });
     of.close();
     return conclusion;
@@ -292,14 +291,15 @@ bool UserInterface::readFromFile(const string& filename) {
 
     while (ifs.peek() != EOF){
         getline(ifs, type, '\n');
-
+        Person *person;
         if (type == "Student"){
-            Student *student = new Student();
-            ifs >> *student;
+            person = new Student();
+            ifs >> (*person);
         } else if (type == "Postgraduate"){
-            Postgraduate *postgraduate = new Postgraduate();
-            ifs >> *postgraduate;
+            person = new Postgraduate();
+            ifs >> (*person);
         }
+        lst.insert(person);
     }
     ifs.close();
     return true;
