@@ -1,6 +1,3 @@
-//
-// Created by cio on 6/5/21.
-//
 
 #ifndef COURSEWORK_STUDENT_H
 #define COURSEWORK_STUDENT_H
@@ -14,19 +11,23 @@ private:
     string university;
     string faculty;
 
+    // ------------------------------- methods for working with stream
     void osSerialize(ostream &os) const override;
-    virtual void ofSerialize(ofstream &of) const override;
-    virtual void ifDeserialize(ifstream &is) override;
+    void ofSerialize(ofstream &of) const override;
+    void ifDeserialize(ifstream &is) override;
 
 public:
+    // ------------------------------- constructor/destructor
     Student();
     Student(const string &name, const string &surname, unsigned int age, unsigned int course, const string &university, const string &faculty);
-    ~Student() = default;
+    ~Student() override = default;
 
+    // ------------------------------- setters
     void setCourse(unsigned int course);
     void setUniversity(const string &university);
     void setFaculty(const string &faculty);
 
+    // ------------------------------- getters
     string getType() const override;
     unsigned int getCourse() const;
     string getUniversity() const;

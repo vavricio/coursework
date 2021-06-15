@@ -1,6 +1,3 @@
-//
-// Created by cio on 6/5/21.
-//
 
 #ifndef COURSEWORK_CYCLICLIST_H
 #define COURSEWORK_CYCLICLIST_H
@@ -10,21 +7,28 @@
 
 
 struct Node {
+    // ------------------------------- Node constructor/destructor
     Node(Person* value, Node * next);
     ~Node();
+
     Person* value;
     Node * next;
 };
 
 class CyclicList {
 public:
+    // ------------------------------- constructor/destructor
     CyclicList();
     ~CyclicList();
+
+    // ------------------------------- List methods
     unsigned int getSize() const;
     void insert(Person* element);
     bool del(unsigned int index);
     bool deleteAll();
     bool sort();
+
+    // ------------------------------- Method apply with lambda function
     bool apply(const std::function<void (Person*)>& fun);
 private:
     Node *end;

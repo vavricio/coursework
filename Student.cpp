@@ -1,15 +1,13 @@
-//
-// Created by cio on 6/5/21.
-//
 
 #include "Student.h"
 
-
+// ------------------------------- constructor implementation
 Student::Student() : Person(), course(0), university("default"), faculty("default") {}
 
 Student::Student(const string &name, const string &surname, unsigned int age, unsigned int course, const string &university, const string &faculty)
     : Person(name, surname, age), course(course), university(university), faculty(faculty) {}
 
+// ------------------------------- setters implementation
 void Student::setCourse(unsigned int course) {
     this->course = course;
 }
@@ -22,6 +20,7 @@ void Student::setFaculty(const string &faculty) {
     this->faculty = faculty;
 }
 
+// ------------------------------- getters implementation
 unsigned int Student::getCourse() const {
     return course;
 }
@@ -34,6 +33,7 @@ string Student::getFaculty() const {
     return faculty;
 }
 
+// ------------------------------- methods for working with stream implementation
 void Student::osSerialize(ostream &os) const {
     Person::osSerialize(os);
     os << "Course:" << " " << course << "\n"

@@ -1,6 +1,3 @@
-//
-// Created by cio on 6/5/21.
-//
 
 #include "UserInterface.h"
 #include <iostream>
@@ -9,12 +6,14 @@
 
 using namespace std;
 
+// ------------------------------- Constant values
 const unsigned int maxCommandNumber = 9;
 const unsigned int maxAge = 200;
 const unsigned int maxCourse = 6;
 
 UserInterface* UserInterface::ui = nullptr;
 
+// ------------------------------- User Interface
 [[noreturn]] void UserInterface::startInterface() {
     while (true){
         //system("cls");
@@ -119,6 +118,8 @@ UserInterface* UserInterface::ui = nullptr;
     }
 }
 
+// ------------------------------- UI methods implementation
+
 UserInterface *UserInterface::getUserInterface() {
     if (ui == nullptr){
         ui = new UserInterface();
@@ -218,8 +219,6 @@ bool UserInterface::showElements() {
     }
     return conclusion;
 }
-
-// -------------------------------------------------------
 
 bool UserInterface::makeRequest(unsigned int courseNumber) {
     bool conclusion;

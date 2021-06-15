@@ -1,6 +1,3 @@
-//
-// Created by cio on 6/5/21.
-//
 
 #ifndef COURSEWORK_USERINTERFACE_H
 #define COURSEWORK_USERINTERFACE_H
@@ -13,14 +10,25 @@
 using namespace std;
 class UserInterface {
 public:
+    // ------------------------------- Start UI method
     [[noreturn]] void startInterface();
+
+    // ------------------------------- Singleton
     static UserInterface *getUserInterface();
 private:
+
+    // ------------------------------- constructor
     UserInterface() = default;
+
+    // ------------------------------- Method fow validation course
     unsigned int validateCourse();
+
+    // ------------------------------- Methods for creating elements
     void getPersonData(string &name, string &surname, unsigned int &age);
     void createStudent();
     void createPostgraduate();
+
+    // ------------------------------- Methods for working with list
     bool sortElements();
     bool showElements();
     bool makeRequest(unsigned int courseNumber);

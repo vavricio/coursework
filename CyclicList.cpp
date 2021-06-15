@@ -1,21 +1,21 @@
-//
-// Created by cio on 6/5/21.
-//
 
 #include "CyclicList.h"
 
+// ------------------------------- Node constructor and destructor implementation
 Node::Node(Person *value_, Node *next_) : value(value_), next(next_){}
 
 Node::~Node() {
     delete value;
 }
 
+// ------------------------------- List constructor and destructor implementation
 CyclicList::CyclicList() : end(nullptr), size(0) {}
 
 CyclicList::~CyclicList() {
     deleteAll();
 }
 
+// ------------------------------- List methods implementation
 unsigned int CyclicList::getSize() const {
     return size;
 }
@@ -39,7 +39,7 @@ void CyclicList::insert(Person* element) {
     end = newNode;
 }
 
-bool CyclicList::del(uint index) {
+bool CyclicList::del(unsigned int index) {
     if(end == nullptr){
         cout << "List is empty" << endl;
         return false;
@@ -71,11 +71,10 @@ bool CyclicList::del(uint index) {
 
     Node* currentNode = end->next;
 
-    // визначаємо вузол що передує видаляємому
     for (int i = 0; i < index - 1; ++i) {
         currentNode = currentNode->next;
     }
-    // вузол після видаляємого
+
     Node* tempRef = currentNode->next->next;
 
     cout << "Surname of deleted object:" << currentNode->next->value->getSurname() << endl;
@@ -115,18 +114,6 @@ bool CyclicList::deleteAll() {
     return true;
 }
 
-bool CyclicList::apply(const std::function<void (Person*)>& fun) {
-    if(end == nullptr)
-        return false;
-
-    Node* currentNode = end->next;
-    do  {
-        fun(currentNode->value);
-        currentNode = currentNode->next;
-    } while (currentNode != end->next);
-    return true;
-}
-
 bool CyclicList::sort() {
     if(size <= 1)
         return false;
@@ -151,5 +138,18 @@ bool CyclicList::sort() {
             nextNode = currentNode->next;
         }
     }
+    return true;
+}
+
+// ------------------------------- Apply method implementation
+bool CyclicList::apply(const std::function<void (Person*)>& fun) {
+    if(end == nullptr)
+        return false;
+
+    Node* currentNode = end->next;
+    do  {
+        fun(currentNode->value);
+        currentNode = currentNode->next;
+    } while (currentNode != end->next);
     return true;
 }

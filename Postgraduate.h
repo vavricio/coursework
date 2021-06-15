@@ -1,6 +1,3 @@
-//
-// Created by cio on 6/5/21.
-//
 
 #ifndef COURSEWORK_POSTGRADUATE_H
 #define COURSEWORK_POSTGRADUATE_H
@@ -13,18 +10,23 @@ class Postgraduate : public Person {
 private:
     string field;
     string adviser;
+
+    // ------------------------------- methods for working with stream
     void osSerialize(ostream &os) const override;
-    virtual void ofSerialize(ofstream &of) const override;
-    virtual void ifDeserialize(ifstream &is) override;
+    void ofSerialize(ofstream &of) const override;
+    void ifDeserialize(ifstream &is) override;
 
 public:
+    // ------------------------------- constructor/destructor
     Postgraduate();
     Postgraduate(const string &name, const string &surname, unsigned int age, const string &field, const string &adviser);
-    ~Postgraduate() = default;
+    ~Postgraduate() override = default;
 
+    // ------------------------------- setters
     void setField(const string &field);
     void setAdviser(const string &adviser);
 
+    // ------------------------------- getters
     string getType() const override;
     string getField() const;
     string getAdviser() const;

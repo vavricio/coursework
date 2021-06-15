@@ -1,15 +1,14 @@
-//
-// Created by Cio on 01.06.2021.
-//
 
 #include "Person.h"
 
+// ------------------------------- constructor and destructor implementation
 Person::Person() : name("default"), surname("default"), age(0) {}
 
 Person::Person(const string &name, const string &surname, unsigned int age): name(name), surname(surname), age(age) {}
 
 Person::~Person() = default;
 
+// ------------------------------- setters implementation
 void Person::setName(const string& name) {
     this->name = name;
 }
@@ -22,6 +21,7 @@ void Person::setAge(const unsigned int& age) {
     this->age = age;
 }
 
+// ------------------------------- getters implementation
 string Person::getName() const {
     return name;
 }
@@ -38,6 +38,7 @@ string Person::getType() const {
     return "Person";
 }
 
+// ------------------------------- methods for working with stream implementation
 void Person::osSerialize(ostream &os) const {
     os << "Identifier:" << " " << getType() << "\n"
        << "Name:" << " " << name << "\n"
@@ -60,6 +61,7 @@ void Person::ifDeserialize(ifstream &is) {
     age = stoul(stringAge);
 }
 
+// ------------------------------- operator overloading implementation
 ostream &operator<<(ostream &os, const Person *person) {
     person->osSerialize(os);
     return os;

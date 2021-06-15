@@ -1,6 +1,3 @@
-//
-// Created by Cio on 01.06.2021.
-//
 
 #ifndef COURSEWORK_PERSON_H
 #define COURSEWORK_PERSON_H
@@ -16,6 +13,7 @@ protected:
     string surname;
     unsigned int age;
 
+    // ------------------------------- methods for working with stream
     virtual void osSerialize(ostream &os) const;
     virtual void ofSerialize(ofstream &of) const;
     virtual void ifDeserialize(ifstream &is);
@@ -24,7 +22,7 @@ public:
     // ------------------------------- constructor/destructor
     Person();
     Person(const string &, const string &, unsigned int);
-    ~Person();
+    virtual ~Person();
 
     // ------------------------------- setters
     void setName(const string& name);
@@ -37,9 +35,7 @@ public:
     string getSurname() const;
     unsigned int getAge() const;
 
-    // ------------------------------- getting ID
-
-
+    // ------------------------------- operator overloading
     friend ostream& operator<<(ostream& os, const Person* person);
     friend ofstream& operator<<(ofstream& of, const Person& person);
     friend ifstream& operator>>(ifstream& is, Person& person);
