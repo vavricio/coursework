@@ -115,8 +115,11 @@ bool CyclicList::deleteAll() {
 }
 
 bool CyclicList::sort() {
-    if(size <= 1)
+    if(size <= 1){
+        cout << "There is nothing to sort" << endl;
         return false;
+    }
+
 
     for(int i = 0; i < size; ++i) {
         Node *currentNode = end->next;

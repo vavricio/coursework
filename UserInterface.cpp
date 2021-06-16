@@ -282,7 +282,7 @@ bool UserInterface::readFromFile(const string& filename) {
     }
 
     if (ifs.peek() == EOF){
-        cout << "File is empty";
+        cout << "File is empty" << endl;
         return false;
     }
 
