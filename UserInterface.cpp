@@ -287,16 +287,20 @@ bool UserInterface::readFromFile(const string& filename) {
     }
 
     string type;
+    Person *person;
 
     while (ifs.peek() != EOF){
         getline(ifs, type, '\n');
-        Person *person;
         if (type == "Student"){
             person = new Student();
             ifs >> (*person);
         } else if (type == "Postgraduate"){
             person = new Postgraduate();
             ifs >> (*person);
+        }
+        else{
+            cout << "File contains errors" << endl;
+            return false;
         }
         lst.insert(person);
     }
