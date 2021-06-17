@@ -2,11 +2,14 @@
 #define BOOST_TEST_MAIN
 
 #include "CyclicList.h"
+#include "Postgraduate.h"
+#include "Student.h"
 #include <boost/test/unit_test.hpp>
+#include <boost/test/output_test_stream.hpp>
 
-BOOST_AUTO_TEST_SUITE(testStudentMethods)
+BOOST_AUTO_TEST_SUITE(unitTests)
 
-    BOOST_AUTO_TEST_CASE(methodsStudent){
+    BOOST_AUTO_TEST_CASE(methodsStudent) {
         Student *testStudent = new Student();
 
         testStudent->setName("Anna");
@@ -31,9 +34,7 @@ BOOST_AUTO_TEST_SUITE(testStudentMethods)
     }
 
 
-    BOOST_AUTO_TEST_SUITE(testPostgraduateMethods)
-
-    BOOST_AUTO_TEST_CASE(methodsStudent){
+    BOOST_AUTO_TEST_CASE(methodsPostgraduate) {
         Postgraduate *testPostgraduate = new Postgraduate();
 
         testPostgraduate->setName("Ivan");
@@ -54,9 +55,63 @@ BOOST_AUTO_TEST_SUITE(testStudentMethods)
         delete testPostgraduate;
     }
 
-    BOOST_AUTO_TEST_CASE(testInsert){
+    BOOST_AUTO_TEST_CASE(testInsert) {
+        CyclicList lst;
+        BOOST_TEST(lst.getSize() == 0);
 
+        Student* student = new Student();
+        lst.insert(student);
+
+        BOOST_TEST(lst.getSize() == 1);
+
+        Postgraduate* postgraduate = new Postgraduate();
+        lst.insert(postgraduate);
+
+        BOOST_TEST(lst.getSize() == 2);
+    }
+
+    BOOST_AUTO_TEST_CASE(testDelByIndex) {
+        CyclicList lst;
+        Student* student1 = new Student();
+        Student* student2 = new Student();
+        Postgraduate* postgraduate = new Postgraduate();
+
+        lst.insert(student1);
+        lst.insert(student2);
+        lst.insert(postgraduate);
+
+        BOOST_TEST(lst.getSize() == 3);
+
+        bool conclusion = lst.del(1);
+        BOOST_TEST(conclusion == true);
+        BOOST_TEST(lst.getSize() == 2);
 }
 
+    BOOST_AUTO_TEST_CASE(testDeleteAll) {
+        CyclicList lst;
+        Student* student1 = new Student();
+        Student* student2 = new Student();
+        Postgraduate* postgraduate = new Postgraduate();
+
+        lst.insert(student1);
+        lst.insert(student2);
+        lst.insert(postgraduate);
+
+        BOOST_TEST(lst.getSize() == 3);
+
+        lst.deleteAll();
+        BOOST_TEST(lst.getSize() == 0);
+}
+
+    BOOST_AUTO_TEST_CASE(testSort) {
+        CyclicList lst;
+        Student* student = new Student("Anna", "Vavryk", 19, 2, "KPI", "FBME");
+        Postgraduate* postgraduate = new Postgraduate("Ivan", "Serov", 22, "Math", "Nastenko");
+        lst.insert(student);
+        lst.insert(postgraduate);
+
+        bool conclusion = lst.sort();
+        BOOST_TEST(conclusion == true);
+}
 
 BOOST_AUTO_TEST_SUITE_END()
